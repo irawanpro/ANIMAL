@@ -119,7 +119,11 @@
         <source src="audio/incorrect_sound.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
+    <audio id="instructionVoice">
+        <source src="audio/instructionVoice.mp3" type="audio/mpeg">
+        Your browser does not support the audio element
+    </audio>
+    
     <script>
         const animals = [
             { emoji: '🐔', name: 'Ayam', options: ['Ayam', 'Bebek', 'Angsa', 'Burung'] },
@@ -142,6 +146,7 @@
         const backgroundMusic = document.getElementById('backgroundMusic');
         const correctSound = document.getElementById('correctSound');
         const incorrectSound = document.getElementById('incorrectSound');
+        const instructionVoice = document.getElementById('instructionVoice');
 
         function shuffleArray(array) {
             const newArray = [...array];
@@ -213,9 +218,9 @@
             
             // Play sound based on answer
             if (isCorrect) {
-                correctSound.play().catch(e => console.error("Gagal memutar suara benar:", e));
+                correctSound.play(0).catch(e => console.error("Gagal memutar suara benar:", e));
             } else {
-                incorrectSound.play().catch(e => console.error("Gagal memutar suara salah:", e));
+                incorrectSound.play(0).catch(e => console.error("Gagal memutar suara salah:", e));
             }
 
             // Show feedback
