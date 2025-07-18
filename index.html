@@ -106,7 +106,11 @@
             </button>
         </div>
     </div>
-
+    
+    <audio id="instructionVoice">
+        <source src="audio/instruction_voice.mp3" type="audio/mpeg">
+        Your browser does not support the audio element
+    </audio>
     <audio id="backgroundMusic" loop>
         <source src="audio/background_music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -118,10 +122,6 @@
     <audio id="incorrectSound">
         <source src="audio/incorrect_sound.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-    </audio>
-    <audio id="instructionVoice">
-        <source src="audio/instructionVoice.mp3" type="audio/mpeg">
-        Your browser does not support the audio element
     </audio>
     
     <script>
@@ -143,11 +143,11 @@
         let gameQuestions = [];
 
         // Get audio elements
+        const instructionVoice = document.getElementById('instructionVoice');
         const backgroundMusic = document.getElementById('backgroundMusic');
         const correctSound = document.getElementById('correctSound');
         const incorrectSound = document.getElementById('incorrectSound');
-        const instructionVoice = document.getElementById('instructionVoice');
-
+        
         function shuffleArray(array) {
             const newArray = [...array];
             for (let i = newArray.length - 1; i > 0; i--) {
@@ -282,6 +282,7 @@
             document.getElementById('endScreen').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
         }
+            document.addEventListener('DOMContentLoaded', playInstructionVoice);
     </script>
 </body>
 </html>
