@@ -156,21 +156,86 @@
             return newArray;
         }
 
+// ... (kode HTML Anda sebelumnya) ...
+
+    <audio id="instructionVoice">
+        <source src="audio/instructionVoive.mp3" type="audio/mpeg">
+        Your browser does not support the audio element
+    </audio>
+    <audio id="backgroundMusic" loop>
+        <source src="audio/background_music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="correctSound">
+        <source src="audio/correct_answer.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="incorrectSound">
+        <source src="audio/incorrect_sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // ... (variabel dan fungsi Anda sebelumnya) ...
+
+        // Get audio elements
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const correctSound = document.getElementById('correctSound');
+        const incorrectSound = document.getElementById('incorrectSound');
+
+        // Tambahkan ini di bagian awal script Anda, setelah definisi elemen audio
+        const instructionVoiceElement = document.getElementById('instructionVoice');
+
+        // Fungsi untuk membacakan teks instruksi
+        function speakInstruction(text) {
+            // Periksa apakah browser mendukung SpeechSynthesis
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID'; // Set bahasa ke Bahasa Indonesia
+                utterance.volume = 1; // Volume (0-1)
+                utterance.rate = 1; // Kecepatan bicara (0.1-10)
+                utterance.pitch = 1; // Nada bicara (0-2)
+
+                // Jika Anda ingin menggunakan suara tertentu, Anda bisa mencari suara yang tersedia
+                // dan mengaturnya di sini. Contoh:
+                // const voices = speechSynthesis.getVoices();
+                // utterance.voice = voices.find(voice => voice.lang === 'id-ID' && voice.name.includes('Google Bahasa Indonesia'));
+
+                speechSynthesis.speak(utterance);
+            } else {
+                console.warn("Browser Anda tidak mendukung Web Speech API untuk text-to-speech.");
+                // Fallback: Jika tidak mendukung, Anda bisa memutar file audio pre-recorded
+                // Namun, karena Anda sudah punya file audio, pastikan path-nya benar
+                instructionVoiceElement.play().catch(e => console.error("Gagal memutar audio instruksi:", e));
+            }
+        }
+
+        // Modifikasi fungsi startGame() untuk memanggil speakInstruction
         function startGame() {
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('gameScreen').classList.remove('hidden');
-            
+
             // Play background music
-            // Perhatikan: Pemutaran otomatis mungkin diblokir oleh browser sampai ada interaksi pengguna
             backgroundMusic.play().catch(e => console.error("Gagal memutar musik latar:", e));
-            
+
             // Shuffle questions
             gameQuestions = shuffleArray(animals);
             currentQuestion = 0;
             score = 0;
-            
+
             showQuestion();
         }
+
+        // Panggil speakInstruction saat halaman dimuat
+        // Anda bisa memanggilnya di sini agar instruksi dibacakan saat layar awal muncul
+        document.addEventListener('DOMContentLoaded', () => {
+            speakInstruction("Tebak hewan dari gambar yang ditampilkan!");
+        });
+
+        // ... (sisa script Anda) ...
+    </script>
+</body>
+</html>
 
         function showQuestion() {
             if (currentQuestion >= gameQuestions.length) {
