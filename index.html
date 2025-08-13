@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
         
         body {
             font-family: 'Nunito', sans-serif;
+            overflow-x: hidden; /* Tambahan untuk mencegah scroll horizontal */
         }
         
         .game-title {
@@ -73,123 +74,125 @@
         .audio-hidden {
             display: none;
         }
+        
+        /* Gaya tambahan untuk zoom-out */
+        .zoom-container {
+            transform: scale(0.85); /* Zoom-out 85% */
+            transform-origin: top left; /* Titik acuan di kiri atas */
+            width: 117.64%; /* 100 / 0.85 = 117.64... */
+            min-height: 100vh;
+        }
     </style>
 </head>
-<body class="min-h-screen overflow-hidden" style="background: linear-gradient(to bottom, rgba(125, 211, 252, 0.8), rgba(186, 230, 253, 0.8), rgba(187, 247, 208, 0.8)), url('assets/images/background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
-    <!-- Clouds -->
-    <div class="cloud absolute top-10 left-10 text-6xl opacity-80">☁️</div>
-    <div class="cloud absolute top-20 right-20 text-4xl opacity-60" style="animation-delay: -2s;">☁️</div>
-    <div class="cloud absolute top-32 left-1/3 text-5xl opacity-70" style="animation-delay: -1s;">☁️</div>
-    
-    <!-- Sun -->
-    <div class="absolute top-8 right-8 text-8xl animate-pulse">☀️</div>
-    
-    <!-- Audio Elements -->
-    <audio id="backgroundMusic" class="audio-hidden" loop>
-        <source src="assets/audio/background_music.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="clickSound" class="audio-hidden">
-        <source src="assets/audio/efekklikhewan.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="buttonSound" class="audio-hidden">
-        <source src="assets/audio/efektombol.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Welcome Card -->
-    <div id="welcomeCard" class="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
-        <div class="bg-white rounded-3xl p-8 text-center shadow-2xl max-w-lg mx-4 transform scale-100 transition-all">
-            <div class="text-6xl mb-4">🦋</div>
-            <h2 class="game-title text-3xl text-purple-600 mb-6">Selamat Datang!</h2>
-            
-            <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 mb-6">
-                <h3 class="text-xl font-bold text-purple-700 mb-4">🎯 Cara Bermain</h3>
-                <div class="space-y-3 text-left">
-                    <div class="flex items-center space-x-3">
+<body class="min-h-screen" style="background: linear-gradient(to bottom, rgba(125, 211, 252, 0.8), rgba(186, 230, 253, 0.8), rgba(187, 247, 208, 0.8)), url('assets/images/background.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="zoom-container overflow-hidden">
+        <div class="cloud absolute top-10 left-10 text-6xl opacity-80">☁️</div>
+        <div class="cloud absolute top-20 right-20 text-4xl opacity-60" style="animation-delay: -2s;">☁️</div>
+        <div class="cloud absolute top-32 left-1/3 text-5xl opacity-70" style="animation-delay: -1s;">☁️</div>
+        
+        <div class="absolute top-8 right-8 text-8xl animate-pulse">☀️</div>
+        
+        <audio id="backgroundMusic" class="audio-hidden" loop>
+            <source src="assets/audio/background_music.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="clickSound" class="audio-hidden">
+            <source src="assets/audio/efekklikhewan.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="buttonSound" class="audio-hidden">
+            <source src="assets/audio/efektombol.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="welcomeCard" class="fixed inset-0 flex items-center justify-center z-50 bg-black/50">
+            <div class="bg-white rounded-3xl p-8 text-center shadow-2xl max-w-lg mx-4 transform scale-100 transition-all">
+                <div class="text-6xl mb-4">🦋</div>
+                <h2 class="game-title text-3xl text-purple-600 mb-6">Selamat Datang!</h2>
+                
+                <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 mb-6">
+                    <h3 class="text-xl font-bold text-purple-700 mb-4">🎯 Cara Bermain</h3>
+                    <div class="space-y-3 text-left">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🦋</span>
+                            <span class="text-gray-700">Klik kupu-kupu = 1 poin</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🐶</span>
+                            <span class="text-gray-700">Klik hewan lain = 0.5 poin</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">⏰</span>
+                            <span class="text-gray-700">Level tinggi = objek lebih banyak & cepat</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🏆</span>
+                            <span class="text-gray-700">Tangkap kupu-kupu sesuai target untuk naik level</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-100 to-blue-100 rounded-2xl p-4 mb-6">
+                    <p class="text-sm text-gray-600">
+                        <span class="font-bold">💡 Tips:</span> Game ini membantu melatih koordinasi mata-tangan dan ketepatan motorik halus anak
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-4 mb-6">
+                    <div class="text-sm text-gray-700 text-center space-y-1">
+                        <div class="font-semibold">Created : GlowandGrow</div>
+                        <div class="font-semibold">Contact person : +6289629065679 /Rahma</div>
+                    </div>
+                </div>
+                
+                <button id="startGameBtn" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
+                    🎮 Mulai Bermain!
+                </button>
+            </div>
+        </div>
+
+        <div id="gameHeader" class="text-center pt-8 pb-4 hidden">
+            <h1 class="game-title text-4xl md:text-6xl text-yellow-600 mb-4 drop-shadow-lg">
+                🦋 Tangkap Kupu-kupu 🦋
+            </h1>
+            <div class="bg-white/80 backdrop-blur-sm rounded-full px-8 py-4 mx-auto max-w-md shadow-lg">
+                <div class="flex justify-between items-center text-lg font-bold">
+                    <div class="text-purple-600">
                         <span class="text-2xl">🦋</span>
-                        <span class="text-gray-700">Klik kupu-kupu = 1 poin</span>
+                        <span id="score">0</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl">🐶</span>
-                        <span class="text-gray-700">Klik hewan lain = 0.5 poin</span>
+                    <div class="text-red-500">
+                        <span class="text-2xl">🦋</span>
+                        <span id="timer">10:00</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl">⏰</span>
-                        <span class="text-gray-700">Level tinggi = objek lebih banyak & cepat</span>
+                    <div class="text-green-600">
+                        <span class="text-2xl">🦋</span>
+                        Level <span id="level">1</span>/10
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-2xl">🏆</span>
-                        <span class="text-gray-700">Tangkap kupu-kupu sesuai target untuk naik level</span>
+                </div>
+                <div class="mt-2">
+                    <div class="text-xs text-gray-600 text-center mb-1">Progress ke Level Berikutnya</div>
+                    <div class="bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <div class="text-xs text-gray-600 text-center mt-1">
+                        <span id="progressText">0/10 kupu-kupu 🦋</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="bg-gradient-to-r from-green-100 to-blue-100 rounded-2xl p-4 mb-6">
-                <p class="text-sm text-gray-600">
-                    <span class="font-bold">💡 Tips:</span> Game ini membantu melatih koordinasi mata-tangan dan ketepatan motorik halus anak
-                </p>
+        </div>
+        
+        <div id="gameArea" class="relative mx-4 h-96 bg-gradient-to-b from-green-300 to-green-400 rounded-3xl shadow-2xl overflow-hidden border-4 border-green-500 hidden">
             </div>
-            
-            <div class="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-4 mb-6">
-                <div class="text-sm text-gray-700 text-center space-y-1">
-                    <div class="font-semibold">Created : GlowandGrow</div>
-                    <div class="font-semibold">Contact person : +6289629065679 /Rahma</div>
-                </div>
-            </div>
-            
-            <button id="startGameBtn" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
-                🎮 Mulai Bermain!
+        
+        <div id="gameControls" class="text-center mt-8 space-x-4 hidden">
+            <button id="startBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
+                🎮 Mulai Game
+            </button>
+            <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all" disabled>
+                ⏸️ Pause
+            </button>
+            <button id="resetBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
+                🔄 Reset
             </button>
         </div>
-    </div>
-
-    <!-- Header -->
-    <div id="gameHeader" class="text-center pt-8 pb-4 hidden">
-        <h1 class="game-title text-4xl md:text-6xl text-yellow-600 mb-4 drop-shadow-lg">
-            🦋 Tangkap Kupu-kupu 🦋
-        </h1>
-        <div class="bg-white/80 backdrop-blur-sm rounded-full px-8 py-4 mx-auto max-w-md shadow-lg">
-            <div class="flex justify-between items-center text-lg font-bold">
-                <div class="text-purple-600">
-                    <span class="text-2xl">🦋</span>
-                    <span id="score">0</span>
-                </div>
-                <div class="text-red-500">
-                    <span class="text-2xl">🦋</span>
-                    <span id="timer">10:00</span>
-                </div>
-                <div class="text-green-600">
-                    <span class="text-2xl">🦋</span>
-                    Level <span id="level">1</span>/10
-                </div>
-            </div>
-            <div class="mt-2">
-                <div class="text-xs text-gray-600 text-center mb-1">Progress ke Level Berikutnya</div>
-                <div class="bg-gray-200 rounded-full h-2">
-                    <div id="progressBar" class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-                </div>
-                <div class="text-xs text-gray-600 text-center mt-1">
-                    <span id="progressText">0/10 kupu-kupu 🦋</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Game Area -->
-    <div id="gameArea" class="relative mx-4 h-96 bg-gradient-to-b from-green-300 to-green-400 rounded-3xl shadow-2xl overflow-hidden border-4 border-green-500 hidden">
-        <!-- Butterflies will be spawned here -->
-    </div>
-    
-    <!-- Control Buttons -->
-    <div id="gameControls" class="text-center mt-8 space-x-4 hidden">
-        <button id="startBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
-            🎮 Mulai Game
-        </button>
-        <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all" disabled>
-            ⏸️ Pause
-        </button>
-        <button id="resetBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all">
-            🔄 Reset
-        </button>
     </div>
 
     <script>
@@ -617,4 +620,5 @@
         });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e6dd9b6225fdca',t:'MTc1NTA3Mzk4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+</html
+
